@@ -22,6 +22,13 @@ func main() {
 }
 ```
 
+## TODO
+
+- [ ] Support index function
+- [ ] Able to match "ễ" and "ê"
+- [ ] SIMP
+- [ ] Add benchmark
+
 ## Contributing
 
 Pull requests are welcome. For major changes,
