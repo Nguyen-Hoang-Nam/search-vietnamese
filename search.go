@@ -1,6 +1,8 @@
 package searchvietnamese
 
-import "strings"
+import (
+	"strings"
+)
 
 var vietnameseToAlphabet = map[string]string{
 	"Á": "A",
@@ -151,6 +153,74 @@ var vietnameseToAlphabet = map[string]string{
 	"ỵ": "y",
 }
 
+var mapCombineVietnameseToVietnamese = map[string]string{
+	"Ắ": "Ă",
+	"ắ": "ă",
+	"Ằ": "Ă",
+	"ằ": "ă",
+	"Ẳ": "Ă",
+	"ẳ": "ă",
+	"Ẵ": "Ă",
+	"ẵ": "ă",
+	"Ặ": "Ă",
+	"ặ": "ă",
+
+	"Ấ": "Â",
+	"ấ": "â",
+	"Ầ": "Â",
+	"ầ": "â",
+	"Ẩ": "Â",
+	"ẩ": "â",
+	"Ẫ": "Â",
+	"ẫ": "â",
+	"Ậ": "Â",
+	"ậ": "â",
+
+	"Ế": "Ê",
+	"ế": "ê",
+	"Ề": "Ê",
+	"ề": "ê",
+	"Ể": "Ê",
+	"ể": "ê",
+	"Ễ": "Ê",
+	"ễ": "ê",
+	"Ệ": "Ê",
+	"ệ": "ê",
+
+	"Ố": "Ô",
+	"ố": "ô",
+	"Ồ": "Ô",
+	"ồ": "ô",
+	"Ổ": "Ô",
+	"ổ": "ô",
+	"Ỗ": "Ô",
+	"ỗ": "ô",
+	"Ộ": "Ô",
+	"ộ": "ô",
+
+	"Ớ": "Ơ",
+	"ớ": "ơ",
+	"Ờ": "Ơ",
+	"ờ": "ơ",
+	"Ở": "Ơ",
+	"ở": "ơ",
+	"Ỡ": "Ơ",
+	"ỡ": "ơ",
+	"Ợ": "Ơ",
+	"ợ": "ơ",
+
+	"Ứ": "Ư",
+	"ứ": "ư",
+	"Ừ": "Ư",
+	"ừ": "ư",
+	"Ử": "Ư",
+	"ử": "ư",
+	"Ữ": "Ư",
+	"ữ": "ư",
+	"Ự": "Ư",
+	"ự": "ư",
+}
+
 func ToAlphabet(text string) string {
 	var sb strings.Builder
 
@@ -166,6 +236,24 @@ func ToAlphabet(text string) string {
 	return sb.String()
 }
 
+func isMatchVietnamese(textCharacter, keywordCharacter string) bool {
+	if _, ok := vietnameseToAlphabet[keywordCharacter]; ok {
+		// fmt.Println(keywordCharacter)
+		// fmt.Println(textCharacter)
+		if textCharacter == keywordCharacter {
+			return true
+		} else if singleTextCharacter, ok := mapCombineVietnameseToVietnamese[textCharacter]; ok {
+			if singleTextCharacter == keywordCharacter {
+				return true
+			}
+		}
+
+		return false
+	}
+
+	return true
+}
+
 // Credit https://stackoverflow.com/questions/25837030/find-index-of-a-substring-in-a-string-with-start-index-specified
 func indexAt(text, sep string, position int) int {
 	index := strings.Index(text[position:], sep)
@@ -179,21 +267,18 @@ func indexAt(text, sep string, position int) int {
 func Contain(text, keyword string) bool {
 	alphabetText := strings.ToUpper(ToAlphabet(text))
 	alphabetKeyword := strings.ToUpper(ToAlphabet(keyword))
-
-	index := indexAt(alphabetText, alphabetKeyword, 0)
-	if index == -1 {
-		return false
-	}
-
 	alphabetKeywordLen := len(alphabetKeyword)
 
+	textRune := []rune(text)
+	keywordRune := []rune(keyword)
+	index := indexAt(alphabetText, alphabetKeyword, 0)
 	for index > -1 {
 		isMatch := true
 		for i := index; i < index+alphabetKeywordLen; i++ {
-			keywordCharacter := string(keyword[i-index])
-			textCharacter := string(text[i])
+			textCharacter := string(textRune[i])
+			keywordCharacter := string(keywordRune[i-index])
 
-			if _, ok := vietnameseToAlphabet[keywordCharacter]; ok && keywordCharacter != textCharacter {
+			if !isMatchVietnamese(textCharacter, keywordCharacter) {
 				isMatch = false
 			}
 		}
@@ -202,7 +287,11 @@ func Contain(text, keyword string) bool {
 			return true
 		}
 
+		oldIndex := index
 		index = indexAt(alphabetText, alphabetKeyword, index)
+		if index == oldIndex {
+			break
+		}
 	}
 
 	return false
@@ -213,14 +302,16 @@ func Index(text, keyword string) int {
 	alphabetKeyword := strings.ToUpper(ToAlphabet(keyword))
 	alphabetKeywordLen := len(alphabetKeyword)
 
+	textRune := []rune(text)
+	keywordRune := []rune(keyword)
 	index := indexAt(alphabetText, alphabetKeyword, 0)
 	for index > -1 {
 		isMatch := true
 		for i := index; i < index+alphabetKeywordLen; i++ {
-			keywordCharacter := string(keyword[i-index])
-			textCharacter := string(text[i])
+			textCharacter := string(textRune[i])
+			keywordCharacter := string(keywordRune[i-index])
 
-			if _, ok := vietnameseToAlphabet[keywordCharacter]; ok && keywordCharacter != textCharacter {
+			if !isMatchVietnamese(textCharacter, keywordCharacter) {
 				isMatch = false
 			}
 		}

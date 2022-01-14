@@ -18,16 +18,28 @@ import (
 )
 
 func main() {
-    checkContain := searchvietnamese.Contain("Nguyễn Hoàng Nam", "nguyen")
+    checkContain1 := searchvietnamese.Contain("Nguyễn Hoàng Nam", "nguyen") // true
+    checkContain2 := searchvietnamese.Contain("Nguyễn Hoàng Nam", "nguyên") // true
+    index := searchvietnamese.Index("Nguyễn Hoàng Nam", "hoang") // 7
 }
+```
+
+## Benchmark
+
+```text
+goos: linux
+goarch: amd64
+pkg: github.com/Nguyen-Hoang-Nam/search-vietnamese
+cpu: 11th Gen Intel(R) Core(TM) i5-1135G7 @ 2.40GHz
+BenchmarkContain-8       1561740               755.8 ns/op
 ```
 
 ## TODO
 
-- [ ] Support index function
-- [ ] Able to match "ễ" and "ê"
+- [x] Support index function
+- [x] Able to match "ễ" and "ê"
 - [ ] SIMP
-- [ ] Add benchmark
+- [x] Add benchmark
 
 ## Contributing
 
