@@ -207,3 +207,30 @@ func Contain(text, keyword string) bool {
 
 	return false
 }
+
+func Index(text, keyword string) int {
+	alphabetText := strings.ToUpper(ToAlphabet(text))
+	alphabetKeyword := strings.ToUpper(ToAlphabet(keyword))
+	alphabetKeywordLen := len(alphabetKeyword)
+
+	index := indexAt(alphabetText, alphabetKeyword, 0)
+	for index > -1 {
+		isMatch := true
+		for i := index; i < index+alphabetKeywordLen; i++ {
+			keywordCharacter := string(keyword[i-index])
+			textCharacter := string(text[i])
+
+			if _, ok := vietnameseToAlphabet[keywordCharacter]; ok && keywordCharacter != textCharacter {
+				isMatch = false
+			}
+		}
+
+		if isMatch {
+			return index
+		}
+
+		index = indexAt(alphabetText, alphabetKeyword, index)
+	}
+
+	return -1
+}

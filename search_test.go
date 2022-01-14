@@ -12,3 +12,10 @@ func TestContain(t *testing.T) {
 		t.Errorf("Nguyễn Hoàng Nam does not contain nguyen")
 	}
 }
+
+func TestIndex(t *testing.T) {
+	got := searchvietnamese.Index("Nguyễn Hoàng Nam", "hoang")
+	if got != 7 {
+		t.Errorf("Nguyễn Hoàng Nam does not contain nguyen")
+	}
+}
