@@ -6,21 +6,26 @@ import (
 	searchvietnamese "github.com/Nguyen-Hoang-Nam/search-vietnamese"
 )
 
+var boolResult bool
+
 func BenchmarkContain(b *testing.B) {
+	var r bool
 	for i := 0; i < b.N; i++ {
-		searchvietnamese.Contain("Nguyễn Hoàng Nam", "nguyen")
+		r = searchvietnamese.Contains("Nguyễn Hoàng Nam", "nguyen")
 	}
+
+	boolResult = r
 }
 
 func TestContain1(t *testing.T) {
-	got := searchvietnamese.Contain("Nguyễn Hoàng Nam", "nguyen")
+	got := searchvietnamese.Contains("Nguyễn Hoàng Nam", "nguyen")
 	if !got {
 		t.Errorf("Nguyễn Hoàng Nam does not contain nguyen")
 	}
 }
 
 func TestContain2(t *testing.T) {
-	got := searchvietnamese.Contain("Nguyễn Hoàng Nam", "nguyên")
+	got := searchvietnamese.Contains("Nguyễn Hoàng Nam", "nguyên")
 	if !got {
 		t.Errorf("Nguyễn Hoàng Nam does not contain nguyên")
 	}

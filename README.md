@@ -18,8 +18,8 @@ import (
 )
 
 func main() {
-    checkContain1 := searchvietnamese.Contain("Nguyễn Hoàng Nam", "nguyen") // true
-    checkContain2 := searchvietnamese.Contain("Nguyễn Hoàng Nam", "nguyên") // true
+    checkContain1 := searchvietnamese.Contains("Nguyễn Hoàng Nam", "nguyen") // true
+    checkContain2 := searchvietnamese.Contains("Nguyễn Hoàng Nam", "nguyên") // true
     index := searchvietnamese.Index("Nguyễn Hoàng Nam", "hoang") // 7
 }
 ```
@@ -38,7 +38,6 @@ BenchmarkContain-8       1561740               755.8 ns/op
 
 - [x] Support index function
 - [x] Able to match "ễ" and "ê"
-- [ ] SIMP
 - [x] Add benchmark
 
 ## Contributing

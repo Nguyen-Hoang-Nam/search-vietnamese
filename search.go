@@ -238,8 +238,6 @@ func ToAlphabet(text string) string {
 
 func isMatchVietnamese(textCharacter, keywordCharacter string) bool {
 	if _, ok := vietnameseToAlphabet[keywordCharacter]; ok {
-		// fmt.Println(keywordCharacter)
-		// fmt.Println(textCharacter)
 		if textCharacter == keywordCharacter {
 			return true
 		} else if singleTextCharacter, ok := mapCombineVietnameseToVietnamese[textCharacter]; ok {
@@ -264,7 +262,7 @@ func indexAt(text, sep string, position int) int {
 	return index
 }
 
-func Contain(text, keyword string) bool {
+func Contains(text, keyword string) bool {
 	alphabetText := strings.ToUpper(ToAlphabet(text))
 	alphabetKeyword := strings.ToUpper(ToAlphabet(keyword))
 	alphabetKeywordLen := len(alphabetKeyword)
