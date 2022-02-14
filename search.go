@@ -323,3 +323,66 @@ func Index(text, keyword string) int {
 
 	return -1
 }
+
+// Case sensitive
+func ContainsSensitive(text, keyword string) bool {
+	alphabetText := ToAlphabet(text)
+	alphabetKeyword := ToAlphabet(keyword)
+	alphabetKeywordLen := len(alphabetKeyword)
+
+	textRune := []rune(text)
+	keywordRune := []rune(keyword)
+	index := indexAt(alphabetText, alphabetKeyword, 0)
+	for index > -1 {
+		isMatch := true
+		for i := index; i < index+alphabetKeywordLen; i++ {
+			textCharacter := string(textRune[i])
+			keywordCharacter := string(keywordRune[i-index])
+
+			if !isMatchVietnamese(textCharacter, keywordCharacter) {
+				isMatch = false
+			}
+		}
+
+		if isMatch {
+			return true
+		}
+
+		oldIndex := index
+		index = indexAt(alphabetText, alphabetKeyword, index)
+		if index == oldIndex {
+			break
+		}
+	}
+
+	return false
+}
+
+func IndexSensitive(text, keyword string) int {
+	alphabetText := ToAlphabet(text)
+	alphabetKeyword := ToAlphabet(keyword)
+	alphabetKeywordLen := len(alphabetKeyword)
+
+	textRune := []rune(text)
+	keywordRune := []rune(keyword)
+	index := indexAt(alphabetText, alphabetKeyword, 0)
+	for index > -1 {
+		isMatch := true
+		for i := index; i < index+alphabetKeywordLen; i++ {
+			textCharacter := string(textRune[i])
+			keywordCharacter := string(keywordRune[i-index])
+
+			if !isMatchVietnamese(textCharacter, keywordCharacter) {
+				isMatch = false
+			}
+		}
+
+		if isMatch {
+			return index
+		}
+
+		index = indexAt(alphabetText, alphabetKeyword, index)
+	}
+
+	return -1
+}
