@@ -448,3 +448,63 @@ Outer:
 
 	return true
 }
+
+func EqualSensitive(target, source string) bool {
+	alphabetTarget := ToAlphabet(target)
+	alphabetSource := ToAlphabet(source)
+
+	alphabetKeywordLen := len(alphabetSource)
+
+	if alphabetSource == alphabetTarget {
+		targetRune := []rune(target)
+		sourceRune := []rune(source)
+
+		for i := 0; i < alphabetKeywordLen; i++ {
+			targetCharacter := string(targetRune[i])
+			sourceCharacter := string(sourceRune[i])
+
+			if !isMatchVietnamese(targetCharacter, sourceCharacter) {
+				return false
+			}
+		}
+
+		return true
+	}
+
+	return false
+}
+
+// Credit https://github.com/lithammer/fuzzysearch/blob/master/fuzzy/fuzzy.go
+func FuzzyMatchSensitive(text, keyword string) bool {
+	lenDiff := len(text) - len(keyword)
+
+	if lenDiff < 0 {
+		return false
+	}
+
+	if lenDiff == 0 && EqualSensitive(text, keyword) {
+		return true
+	}
+
+	keywordRune := []rune(keyword)
+	keywordLength := len(keywordRune)
+
+Outer:
+	for i := 0; i < keywordLength; i++ {
+
+		textRune := []rune(text)
+
+		fmt.Println(keywordRune, textRune)
+		textLength := len(textRune)
+		for j := 0; j < textLength; j++ {
+			if EqualSensitive(string(textRune[j]), string(keywordRune[i])) {
+				text = text[j+utf8.RuneLen(textRune[j]):]
+				continue Outer
+			}
+		}
+
+		return false
+	}
+
+	return true
+}

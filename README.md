@@ -41,6 +41,8 @@ BenchmarkContain-8       1561740               755.8 ns/op
 - [x] Add benchmark
 - [x] Support fuzzy search
 - [x] Add case-sensitive mode
+- [ ] Add CI/CD
+- [ ] Add coverage badge
 
 ## Contributing
 
