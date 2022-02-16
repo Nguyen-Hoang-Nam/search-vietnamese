@@ -39,7 +39,7 @@ BenchmarkContain-8       1561740               755.8 ns/op
 - [x] Support index function
 - [x] Able to match "ễ" and "ê"
 - [x] Add benchmark
-- [ ] Support fuzzy search
+- [x] Support fuzzy search
 - [x] Add case-sensitive mode
 
 ## Contributing

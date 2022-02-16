@@ -1,7 +1,9 @@
 package searchvietnamese
 
 import (
+	"fmt"
 	"strings"
+	"unicode/utf8"
 )
 
 var vietnameseToAlphabet = map[string]string{
@@ -385,4 +387,64 @@ func IndexSensitive(text, keyword string) int {
 	}
 
 	return -1
+}
+
+func Equal(target, source string) bool {
+	alphabetTarget := strings.ToUpper(ToAlphabet(target))
+	alphabetSource := strings.ToUpper(ToAlphabet(source))
+
+	alphabetKeywordLen := len(alphabetSource)
+
+	if alphabetSource == alphabetTarget {
+		targetRune := []rune(target)
+		sourceRune := []rune(source)
+
+		for i := 0; i < alphabetKeywordLen; i++ {
+			targetCharacter := string(targetRune[i])
+			sourceCharacter := string(sourceRune[i])
+
+			if !isMatchVietnamese(targetCharacter, sourceCharacter) {
+				return false
+			}
+		}
+
+		return true
+	}
+
+	return false
+}
+
+// Credit https://github.com/lithammer/fuzzysearch/blob/master/fuzzy/fuzzy.go
+func FuzzyMatch(text, keyword string) bool {
+	lenDiff := len(text) - len(keyword)
+
+	if lenDiff < 0 {
+		return false
+	}
+
+	if lenDiff == 0 && Equal(text, keyword) {
+		return true
+	}
+
+	keywordRune := []rune(keyword)
+	keywordLength := len(keywordRune)
+
+Outer:
+	for i := 0; i < keywordLength; i++ {
+
+		textRune := []rune(text)
+
+		fmt.Println(keywordRune, textRune)
+		textLength := len(textRune)
+		for j := 0; j < textLength; j++ {
+			if Equal(string(textRune[j]), string(keywordRune[i])) {
+				text = text[j+utf8.RuneLen(textRune[j]):]
+				continue Outer
+			}
+		}
+
+		return false
+	}
+
+	return true
 }

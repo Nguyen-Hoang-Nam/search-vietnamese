@@ -142,3 +142,45 @@ func TestIndexSensitive6(t *testing.T) {
 		t.Errorf("Nguyễn Hoàng Nam does not contain nguyên")
 	}
 }
+
+func TestEqual1(t *testing.T) {
+	got := searchvietnamese.Equal("NguyỄn", "NguyÊn")
+	if !got {
+		t.Errorf("NguyỄn does equal NguyÊn")
+	}
+}
+
+func TestEqual2(t *testing.T) {
+	got := searchvietnamese.Equal("NguyỄn", "NguyEn")
+	if !got {
+		t.Errorf("NguyỄn does equal NguyEn")
+	}
+}
+
+func TestEqual3(t *testing.T) {
+	got := searchvietnamese.Equal("NguyỄn", "NguyAn")
+	if got {
+		t.Errorf("NguyỄn does not equal NguyAn")
+	}
+}
+
+func TestFuzzyMatch1(t *testing.T) {
+	got := searchvietnamese.FuzzyMatch("NguyỄn", "NuyÊn")
+	if !got {
+		t.Errorf("NguyỄn does fuzzy match NuyÊn")
+	}
+}
+
+func TestFuzzyMatch2(t *testing.T) {
+	got := searchvietnamese.FuzzyMatch("NguyỄn", "NguE")
+	if !got {
+		t.Errorf("NguyỄn does fuzzy match NguE")
+	}
+}
+
+func TestFuzzyMatch3(t *testing.T) {
+	got := searchvietnamese.FuzzyMatch("NguyỄn", "Nguyeen")
+	if got {
+		t.Errorf("NguyỄn does not fuzzy match Nguyeen")
+	}
+}
