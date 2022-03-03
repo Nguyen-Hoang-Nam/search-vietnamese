@@ -1,7 +1,6 @@
 package searchvietnamese
 
 import (
-	"fmt"
 	"strings"
 	"unicode/utf8"
 )
@@ -434,7 +433,6 @@ Outer:
 
 		textRune := []rune(text)
 
-		fmt.Println(keywordRune, textRune)
 		textLength := len(textRune)
 		for j := 0; j < textLength; j++ {
 			if Equal(string(textRune[j]), string(keywordRune[i])) {
@@ -494,7 +492,6 @@ Outer:
 
 		textRune := []rune(text)
 
-		fmt.Println(keywordRune, textRune)
 		textLength := len(textRune)
 		for j := 0; j < textLength; j++ {
 			if EqualSensitive(string(textRune[j]), string(keywordRune[i])) {
