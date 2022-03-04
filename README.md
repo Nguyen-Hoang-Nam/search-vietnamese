@@ -1,10 +1,12 @@
 # Search Vietnamese
 
+![Github action](https://github.com/Nguyen-Hoang-Nam/search-vietnamese/actions/workflows/go.yml/badge.svg)
+
 Simple go package to search vietnamese words
 
 ## Installation
 
-```go
+```text
 go get github.com/Nguyen-Hoang-Nam/search-vietnamese
 ```
 
@@ -18,9 +20,12 @@ import (
 )
 
 func main() {
-    checkContain1 := searchvietnamese.Contains("Nguyễn Hoàng Nam", "nguyen") // true
-    checkContain2 := searchvietnamese.Contains("Nguyễn Hoàng Nam", "nguyên") // true
+    searchvietnamese.Contains("Nguyễn Hoàng Nam", "nguyen") // true
+    searchvietnamese.Contains("Nguyễn Hoàng Nam", "nguyên") // true
+    searchvietnamese.Contains("Nguyễn Hoàng Nam", "ngyên") // false
+
     index := searchvietnamese.Index("Nguyễn Hoàng Nam", "hoang") // 7
+    index := searchvietnamese.Index("Nguyễn Hoàng Nam", "hang") // -1
 }
 ```
 
@@ -41,7 +46,7 @@ BenchmarkContain-8       1561740               755.8 ns/op
 - [x] Add benchmark
 - [x] Support fuzzy search
 - [x] Add case-sensitive mode
-- [ ] Add CI/CD
+- [x] Add CI/CD
 - [ ] Add coverage badge
 
 ## Contributing
