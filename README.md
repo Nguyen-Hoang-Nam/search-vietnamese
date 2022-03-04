@@ -1,6 +1,7 @@
 # Search Vietnamese
 
 ![Github action](https://github.com/Nguyen-Hoang-Nam/search-vietnamese/actions/workflows/go.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/Nguyen-Hoang-Nam/search-vietnamese/badge.svg?branch=main)](https://coveralls.io/github/Nguyen-Hoang-Nam/search-vietnamese?branch=main)
 
 Simple go package to search vietnamese words
 
