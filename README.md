@@ -42,13 +42,7 @@ BenchmarkContain-8       1561740               755.8 ns/op
 
 ## TODO
 
-- [x] Support index function
-- [x] Able to match "ễ" and "ê"
-- [x] Add benchmark
-- [x] Support fuzzy search
-- [x] Add case-sensitive mode
-- [x] Add CI/CD
-- [ ] Add coverage badge
+- [ ] Add document comments
 
 ## Contributing
 
