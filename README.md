@@ -43,6 +43,7 @@ BenchmarkContain-8       1561740               755.8 ns/op
 ## TODO
 
 - [ ] Add document comments
+- [ ] Add release version
 
 ## Contributing
 
