@@ -20,6 +20,7 @@ func equal(targetRune, sourceRune []rune, alphabetTarget, alphabetSource string)
 	return false
 }
 
+// Equal check two Vietnamese string equal
 func Equal(target, source string) bool {
 	targetRune := []rune(target)
 	sourceRune := []rune(source)
@@ -30,6 +31,7 @@ func Equal(target, source string) bool {
 	return equal(targetRune, sourceRune, alphabetTarget, alphabetSource)
 }
 
+// EqualSensitive check two Vietnamese string equal with case-sensitive.
 func EqualSensitive(target, source string) bool {
 	targetRune := []rune(target)
 	sourceRune := []rune(source)

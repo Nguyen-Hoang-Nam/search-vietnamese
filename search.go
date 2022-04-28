@@ -1,9 +1,11 @@
+// Package searchvietnamese provide tool to search Vietnamese text more pleasant.
 package searchvietnamese
 
 import (
 	"strings"
 )
 
+// ToAlphabetSensitive convert slice of rune to a string that replace all Vietnamese characters with alphabet characters, respectively.
 func ToAlphabetSensitive(text []rune) string {
 	var sb strings.Builder
 	sb.Grow(len(text))
@@ -19,6 +21,8 @@ func ToAlphabetSensitive(text []rune) string {
 	return sb.String()
 }
 
+// StrictToAlphabetSensitive convert slice of rune to a string that replace all Vietnamese characters with alphabet characters, respectively.
+// This function assume that your text is valid Vietnamese paragraph. It mean there are no other UTF-8 characters than Vietnamese characters.
 func StrictToAlphabetSensitive(text []rune) string {
 	var sb strings.Builder
 	sb.Grow(len(text))

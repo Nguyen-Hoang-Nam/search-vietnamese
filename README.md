@@ -89,7 +89,6 @@ BenchmarkStrictToAlphabet-8   	7058474	      167.2 ns/op
 ## TODO
 
 - [ ] Convert text to regex to search Vietnamese
-- [ ] Add release version
 
 ## Contributing
 

@@ -2,6 +2,7 @@ package searchvietnamese
 
 import "unicode/utf8"
 
+// FuzzyMatch fuzzy check keyword in Vietnamese text.
 // Credit https://github.com/lithammer/fuzzysearch/blob/master/fuzzy/fuzzy.go
 func FuzzyMatch(text, keyword string) bool {
 	lenDiff := len(text) - len(keyword)
@@ -36,6 +37,7 @@ Outer:
 	return true
 }
 
+// FuzzyMatchSensitive fuzzy check keyword in Vietnamese text with case-sensitive.
 // Credit https://github.com/lithammer/fuzzysearch/blob/master/fuzzy/fuzzy.go
 func FuzzyMatchSensitive(text, keyword string) bool {
 	lenDiff := len(text) - len(keyword)

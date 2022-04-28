@@ -28,6 +28,7 @@ func contains(textRune, keywordRune []rune, alphabetText, alphabetKeyword string
 	return false
 }
 
+// Contains check keyword in Vietnamese text.
 func Contains(text, keyword string) bool {
 	textRune := []rune(text)
 	keywordRune := []rune(keyword)
@@ -38,6 +39,7 @@ func Contains(text, keyword string) bool {
 	return contains(textRune, keywordRune, alphabetText, alphabetKeyword)
 }
 
+// ContainsSensitive check keyword in Vietnamese text with case-sensitive.
 func ContainsSensitive(text, keyword string) bool {
 	textRune := []rune(text)
 	keywordRune := []rune(keyword)
@@ -48,6 +50,8 @@ func ContainsSensitive(text, keyword string) bool {
 	return contains(textRune, keywordRune, alphabetText, alphabetKeyword)
 }
 
+// StrictContains check keyword in Vietnamese text.
+// This function assume that your text is valid Vietnamese paragraph. It mean there are no other UTF-8 characters than Vietnamese characters.
 func StrictContains(text, keyword string) bool {
 	textRune := []rune(text)
 	keywordRune := []rune(keyword)
@@ -58,6 +62,8 @@ func StrictContains(text, keyword string) bool {
 	return contains(textRune, keywordRune, alphabetText, alphabetKeyword)
 }
 
+// StrictContainsSensitive check keyword in Vietnamese text with case-sensitive.
+// This function assume that your text is valid Vietnamese paragraph. It mean there are no other UTF-8 characters than Vietnamese characters.
 func StrictContainsSensitive(text, keyword string) bool {
 	textRune := []rune(text)
 	keywordRune := []rune(keyword)
